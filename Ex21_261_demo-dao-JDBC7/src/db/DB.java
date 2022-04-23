@@ -1,4 +1,5 @@
-/*Classe DB com métodos personalizados DbException.
+/*Projeto: Ex21_261_demo-dao-JDBC7
+ *Classe DB com métodos personalizados DbException.
  *Obter e fechar uma conexãodom o banco de dados.
  */
 package db;

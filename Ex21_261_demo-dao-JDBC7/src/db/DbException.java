@@ -1,4 +1,5 @@
-/*Exceção personalizada DbException*/
+/*Projeto: Ex21_261_demo-dao-JDBC7
+ *Exceção personalizada DbException*/
 package db;
 
 public class DbException extends RuntimeException {

@@ -1,4 +1,5 @@
-/*Esta é uma exceção personalizada de 'integridade referencial'.
+/*Projeto: Ex21_261_demo-dao-JDBC7
+ *Esta é uma exceção personalizada de 'integridade referencial'.
  */
 package db;
 
