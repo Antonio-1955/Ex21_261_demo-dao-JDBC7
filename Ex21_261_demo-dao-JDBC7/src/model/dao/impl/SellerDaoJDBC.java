@@ -1,6 +1,7 @@
 /*Projeto: Ex21_261_demo-dao-JDBC7
  */
 package model.dao.impl; //impl = implementação
+//===============================================================================
 
 import db.DB;
 import db.DbException;
@@ -15,6 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+//==============================================================================
 
 //Esta é uma implementação JDBC da interface SellerDao.
 public class SellerDaoJDBC implements SellerDao {
@@ -106,7 +108,42 @@ public class SellerDaoJDBC implements SellerDao {
     //Método para listar dados do banco de dados
     @Override
     public List<Seller> findAll() {
-        return null;
+        PreparedStatement st = null;
+        ResultSet rs = null;
+        try {
+            st = conn.prepareStatement(
+                    "SELECT seller.*, department.Name as DepName " 
+                    + "FROM seller INNER JOIN department " 
+                    + " ON seller.DepartmentId = department.Id "
+                    + " ORDER BY Name");
+
+            rs = st.executeQuery();
+
+            List<Seller> list = new ArrayList();
+            Map<Integer, Department> map = new HashMap<>();
+            
+            while (rs.next()) {
+                
+                Department dep = map.get(rs.getInt("DepartmentId"));
+                
+                if (dep == null) {
+                    dep = instantiateDepartment(rs);
+                    map.put(rs.getInt("DepartmentId"), dep);
+                }
+
+                //Instancia o Vendedor (Seller)
+                Seller obj = instantiateSeller(rs, dep);
+                list.add(obj);
+
+            }
+            return list;
+
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        } finally {
+            DB.closeStatement(st);
+            DB.closeResultSet(rs);
+        }
     }
 //==============================================================================
     

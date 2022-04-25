@@ -32,6 +32,14 @@ public class Programa_main_261 {
          for (Seller obj : list){
              System.out.println(obj);
          }
+         
+         System.out.println("\n==== TESTE-3: seller findAll ====");
+         //Department department = new Department(2, null); 
+         list = sellerDao.findAll();
+         
+         for (Seller obj : list){
+             System.out.println(obj);
+         }
     }
     
 }
