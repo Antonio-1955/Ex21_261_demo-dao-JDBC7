@@ -5,6 +5,7 @@ package application;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Scanner;
 import model.dao.DaoFactory;
 import model.dao.SellerDao;
 import model.entities.Department;
@@ -15,9 +16,7 @@ public class Programa_main_261 {
 
     public static void main(String[] args) {
         
-        //Department obj = new Department(1, "Books");
-        
-        //Seller seller = new Seller(21, "Bob", "bobgmail.com", new Date(), 3000.00, obj);
+        Scanner sc = new Scanner(System.in);
         
         SellerDao sellerDao = DaoFactory.createSellerDao();
 //==============================================================================        
@@ -51,6 +50,7 @@ public class Programa_main_261 {
           Seller newSeller = new Seller(null, "Greg Smith", "gregsmith@gmail.com", new Date(), 4000.00, department);
           sellerDao.insert(newSeller);
           System.out.println("Registro inserido! Novo id = " + newSeller.getId());
+//==============================================================================          
           
           
           System.out.println("\n==== TESTE-5: seller update ====");
@@ -61,7 +61,15 @@ public class Programa_main_261 {
           System.out.println("ATUALIZAÇÃO EFETUADA! id = " + seller.getId());
           System.out.println("Novo Nome = " + seller.getName());
           System.out.println("Novo Email = " + seller.getEmail());
+//==============================================================================
 
+          System.out.println("\n==== TESTE-6: seller delete ====");
+          System.out.print("Digite o código do registro a deletar: ");
+          int id = sc.nextInt();
+          sellerDao.deleteById(id);
+          System.out.println("Registro foi deletado!");
+
+          sc.close();
     }
     
 }

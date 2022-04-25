@@ -98,17 +98,6 @@ public class SellerDaoJDBC implements SellerDao {
             
             st.executeUpdate();
             
-//            if (rowsAffected > 0){
-//                ResultSet rs = st.getGeneratedKeys();
-//                if (rs.next()){
-//                    int id = rs.getInt(1);
-//                    obj.setId(id);
-//                }
-//                DB.closeResultSet(rs);
-//            }
-//            else {
-//                throw new DbException("ERRO INESPERADO! Nenhuma linha foi afetada!");
-//            }
         } 
         catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -122,6 +111,21 @@ public class SellerDaoJDBC implements SellerDao {
     //Métodos deletar dados no o banco de dados
     @Override
     public void deleteById(Integer id) {
+        
+        PreparedStatement st = null;
+        try {
+            st = conn.prepareStatement("DELETE FROM seller WHERE Id = ?");
+            
+            st.setInt(1, id);
+            
+            st.executeUpdate();
+            
+        } catch (SQLException e) {
+            throw new DbException(e.getMessage());
+        }
+        finally {
+            DB.closeStatement(st);
+        }
 
     }
 //==============================================================================
