@@ -47,10 +47,20 @@ public class Programa_main_261 {
          }
 //==============================================================================         
          
-         System.out.println("\n==== TESTE-4: seller insert ====");
+          System.out.println("\n==== TESTE-4: seller insert ====");
           Seller newSeller = new Seller(null, "Greg Smith", "gregsmith@gmail.com", new Date(), 4000.00, department);
           sellerDao.insert(newSeller);
           System.out.println("Registro inserido! Novo id = " + newSeller.getId());
+          
+          
+          System.out.println("\n==== TESTE-5: seller update ====");
+          seller = sellerDao.findById(1);
+          seller.setName("Maryanne Waine");
+          seller.setEmail("maryanne.waine@gmail.com");
+          sellerDao.update(seller);
+          System.out.println("ATUALIZAÇÃO EFETUADA! id = " + seller.getId());
+          System.out.println("Novo Nome = " + seller.getName());
+          System.out.println("Novo Email = " + seller.getEmail());
 
     }
     
